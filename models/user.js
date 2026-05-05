@@ -10,7 +10,10 @@ const userSchema= mongoose.Schema({
      createdAt: { type: Date, default: Date.now },
      isAdmin: { type: Boolean, default: false },
      isActive: { type: Boolean, default: true },
+     isAdminVerified: { type: Boolean, default: false },
+     isEmailVerified: { type: Boolean, default: false },
      lastLogin: { type: Date, default: Date.now }
 });
+
 
 module.exports = mongoose.model('User', userSchema);
