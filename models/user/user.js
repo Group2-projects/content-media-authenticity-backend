@@ -12,7 +12,8 @@ const userSchema= mongoose.Schema({
      isActive: { type: Boolean, default: true },
      isAdminVerified: { type: Boolean, default: false },
      isEmailVerified: { type: Boolean, default: false },
-     lastLogin: { type: Date, default: Date.now }
+     lastLogin: { type: Date, default: Date.now },
+     isDeleted: { type: Boolean, default: false }
 });
 
 

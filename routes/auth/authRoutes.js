@@ -1,5 +1,5 @@
 const express= require('express');
-const { registerUser }= require('../../controllers/auth/authController.js');
+const { registerUser, login }= require('../../controllers/auth/authController.js');
 
 const router = express.Router();
 
@@ -9,6 +9,11 @@ const router = express.Router();
 router.post('/api/register', (req, res) => {
     console.log("Registering user with data:", req.body);
     registerUser(req, res);
+});
+
+router.post('/api/login', async (req, res) => {
+    console.log("Logging in user with data:", req.body);
+    await login(req, res);
 });
 
 module.exports = router;

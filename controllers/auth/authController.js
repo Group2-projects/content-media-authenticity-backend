@@ -78,3 +78,40 @@ async function welcomeEmail(userEmail){
         console.error('Error sending email:', error);
     }
 }
+
+exports.login= async (req,res)=>{
+    const schema=Joi.object({
+        email:Joi.string().email().required(),
+        password:Joi.string().min(6).max(12).required()
+    })
+
+    if (!req.body) {
+        return res.status(400).json({ error: "Invalid request body" });
+    }
+
+    // validate request body
+    const { error } = schema.validate(req.body)
+    if (error) {
+        return res.status(400).json({ error: error.details[0].message })
+    }
+    
+    // Authenticate users here
+    try{
+        const userRes = await User.findOne({ email: req.body.email });
+        if (!userRes) return res.status(400).json({ error: 'Invalid email or password' });
+
+        const isMatch = await bcrypt.compare(req.body.password, userRes.password);
+        if (!isMatch) return res.status(400).json({ error: 'Invalid email or password' });
+
+        const isActive = userRes.isActive === true;
+        if (!isActive) return res.status(403).json({ error: 'Your account is inactive. Please contact support.' });
+
+        // If login is successful, set user session and respond
+        req.session.user = userRes; // Store user info in session
+        return res.status(200).json({ message: 'Login successful', user: userRes });
+    }
+    catch (err){
+        console.error(err);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+}
