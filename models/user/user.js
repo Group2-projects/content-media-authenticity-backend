@@ -16,4 +16,13 @@ const userSchema= mongoose.Schema({
 });
 
 
-module.exports = mongoose.model('User', userSchema);
+const userLoginHistory = mongoose.Schema({
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    loginTime: { type: Date, default: Date.now },
+    ipAddress: { type: String, required: true }
+});
+
+module.exports = {
+    User: mongoose.model('User', userSchema),
+    UserLoginHistory: mongoose.model('UserLoginHistory', userLoginHistory)
+};
