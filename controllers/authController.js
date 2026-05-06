@@ -37,6 +37,7 @@ exports.registerUser= async (req,res)=>{
         });
 
         await newUser.save();
+        await welcomeEmail(newUser.email);
         return res.status(201).json({ message: "User registered successfully", user: newUser });
     } catch (err) {
         return res.status(500).json({ error: "Error registering user", details: err.message || err });
@@ -46,7 +47,9 @@ exports.registerUser= async (req,res)=>{
 
 async function welcomeEmail(userEmail){
     const transporter = nodemailer.createTransport({
-        service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS
@@ -55,9 +58,9 @@ async function welcomeEmail(userEmail){
 
     const mailOptions = {
         from: process.env.EMAIL_USER,
-        to: 'recipient@example.com',
-        subject: 'Test Email',
-        text: 'This is a test email sent from Node.js!'
+        to: userEmail,
+        subject: 'Welcome to Our Service',
+        text: 'Thank you for registering! We are excited to have you on board.'
     };
 
     try {

@@ -22,7 +22,14 @@ const userLoginHistory = mongoose.Schema({
     ipAddress: { type: String, required: true }
 });
 
+const userEmailVerificationToken = mongoose.Schema({
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    token: { type: String, required: true },
+    createdAt: { type: Date, default: Date.now, expires: '1h' }
+});
+
 module.exports = {
     User: mongoose.model('User', userSchema),
-    UserLoginHistory: mongoose.model('UserLoginHistory', userLoginHistory)
+    UserLoginHistory: mongoose.model('UserLoginHistory', userLoginHistory),
+    UserEmailVerificationToken: mongoose.model('UserEmailVerificationToken', userEmailVerificationToken)
 };
