@@ -21,3 +21,13 @@ exports.getUserProfile= async (req,res)=>{
         return res.status(500).json({ error: "Error fetching user profile", details: error.message });
     }
 };
+
+/**
+ * Updates the user profile for a given user ID.
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.updateProfile = async(req, res) => {
+    const userId= req.params.id;
+    
+}
