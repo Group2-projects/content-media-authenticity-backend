@@ -3,7 +3,7 @@
 const SESSION_TIMEOUT = 1000 * 60 * 10; // 10 minutes
 
 exports.sessionTimeout = (req, res, next) => {
-    console.log("Session handling here")
+    // console.log("Session handling here")
 
     if (req.session.user) {
 

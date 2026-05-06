@@ -18,7 +18,9 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
     console.error("MongoDB connection error:", err);
 });
 
-
+//Initialization of express here
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
 
 //Use of CORS
 app.use(cors({
@@ -27,9 +29,7 @@ app.use(cors({
     credentials: true
 }));
 
-//Initialization of session here
-app.use(express.urlencoded({extended:true}));
-app.use(express.json());
+//Session here
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
