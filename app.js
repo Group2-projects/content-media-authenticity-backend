@@ -11,7 +11,10 @@ const session=require('express-session');
 const flash=require('connect-flash');
 const passport=require('passport');
 const { sessionTimeout } = require('./middleware/auth');
-const authRoutes= require('./routes/authRoutes');
+
+//Initialize the routes here
+const authRoutes= require('./routes/auth/authRoutes');
+const userRoutes=require('./routes/user/userRoute');
 
 //Mongoose connection here
 mongoose.connect(process.env.MONGODB_URI).then(() => {
@@ -47,8 +50,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-//Initialization of app routes here
+//Use the routes here
 app.use('/',authRoutes);
+app.use('/',userRoutes);
 
 app.listen(process.env.PORT,()=>{   
     console.log(`Server is running on port ${process.env.PORT}`);

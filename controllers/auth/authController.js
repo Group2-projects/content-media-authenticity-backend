@@ -2,7 +2,7 @@ const Joi = require('@hapi/joi');
 const {
     User,
     UserLoginHistory
-} = require('../models/user/user');
+} = require('../../models/user/user');
 const bcrypt = require('bcrypt');
 const nodemailer=require('nodemailer');
 
