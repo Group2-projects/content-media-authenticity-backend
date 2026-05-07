@@ -15,6 +15,7 @@ const { sessionTimeout } = require('./middleware/auth');
 //Initialize the routes here
 const authRoutes= require('./routes/auth/authRoutes');
 const userRoutes=require('./routes/user/userRoute');
+const settingRouter= require('./routes/settings/settingsRoute');
 
 //Mongoose connection here
 mongoose.connect(process.env.MONGODB_URI).then(() => {
@@ -49,10 +50,17 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+//Error handling middleware
+app.use((err, req, res, next) => {
+    console.log(err.stack);
+    res.status(500).send('Something broke!');
+});
+
 
 //Use the routes here
 app.use('/',authRoutes);
 app.use('/',userRoutes);
+app.use('/',settingRouter);
 
 app.listen(process.env.PORT,()=>{   
     console.log(`Server is running on port ${process.env.PORT}`);
