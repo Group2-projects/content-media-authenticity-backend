@@ -93,11 +93,10 @@
                   ]
                 },
                 "url": {
-                  "raw": "localhost:3000/api/register",
+                  "raw": "{{API_URL}}/api/register",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "register"
@@ -189,11 +188,10 @@
                   ]
                 },
                 "url": {
-                  "raw": "localhost:3000/api/register",
+                  "raw": "{{API_URL}}/api/register",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "register"
@@ -285,11 +283,10 @@
                   ]
                 },
                 "url": {
-                  "raw": "localhost:3000/api/register",
+                  "raw": "{{API_URL}}/api/register",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "register"
@@ -381,11 +378,10 @@
                   ]
                 },
                 "url": {
-                  "raw": "localhost:3000/api/register",
+                  "raw": "{{API_URL}}/api/register",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "register"
@@ -477,11 +473,10 @@
                   ]
                 },
                 "url": {
-                  "raw": "localhost:3000/api/register",
+                  "raw": "{{API_URL}}/api/register",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "register"
@@ -573,11 +568,10 @@
                   ]
                 },
                 "url": {
-                  "raw": "localhost:3000/api/register",
+                  "raw": "{{API_URL}}/api/register",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "register"
@@ -669,11 +663,10 @@
                   ]
                 },
                 "url": {
-                  "raw": "localhost:3000/api/register",
+                  "raw": "{{API_URL}}/api/register",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "register"
@@ -799,11 +792,10 @@
                   ]
                 },
                 "url": {
-                  "raw": "localhost:3000/api/register",
+                  "raw": "{{API_URL}}/api/register",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "register"
@@ -874,11 +866,10 @@
                   ]
                 },
                 "url": {
-                  "raw": "localhost:3000/api/login",
+                  "raw": "{{API_URL}}/api/login",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "login"
@@ -939,11 +930,10 @@
                   ]
                 },
                 "url": {
-                  "raw": "localhost:3000/api/login",
+                  "raw": "{{API_URL}}/api/login",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "login"
@@ -1007,11 +997,10 @@
                   ]
                 },
                 "url": {
-                  "raw": "localhost:3000/api/login",
+                  "raw": "{{API_URL}}/api/login",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "login"
@@ -1070,11 +1059,10 @@
                   ]
                 },
                 "url": {
-                  "raw": "localhost:3000/api/login",
+                  "raw": "{{API_URL}}/api/login",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "login"
@@ -1130,11 +1118,10 @@
                   }
                 ],
                 "url": {
-                  "raw": "localhost:3000/api/user/{{user_id}}",
+                  "raw": "{{API_URL}}/api/user/{{user_id}}",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "user",
@@ -1181,11 +1168,10 @@
                   }
                 ],
                 "url": {
-                  "raw": "localhost:3000/api/user/{{user_id}}",
+                  "raw": "{{API_URL}}/api/user/{{user_id}}",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "user",
@@ -1255,11 +1241,10 @@
                   ]
                 },
                 "url": {
-                  "raw": "localhost:3000/api/videos",
+                  "raw": "{{API_URL}}/api/videos",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "videos"
@@ -1321,11 +1306,10 @@
                   ]
                 },
                 "url": {
-                  "raw": "localhost:3000/api/videos",
+                  "raw": "{{API_URL}}/api/videos",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "videos"
@@ -1386,11 +1370,10 @@
                   ]
                 },
                 "url": {
-                  "raw": "localhost:3000/api/videos",
+                  "raw": "{{API_URL}}/api/videos",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "videos"
@@ -1450,11 +1433,10 @@
                   ]
                 },
                 "url": {
-                  "raw": "localhost:3000/api/videos",
+                  "raw": "{{API_URL}}/api/videos",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "videos"
@@ -1505,11 +1487,10 @@
                   }
                 ],
                 "url": {
-                  "raw": "localhost:3000/api/settings",
+                  "raw": "{{API_URL}}/api/settings",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "settings"
@@ -1548,11 +1529,10 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "localhost:3000/api/settings",
+                  "raw": "{{API_URL}}/api/settings",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "settings"
@@ -1592,11 +1572,10 @@
                   }
                 ],
                 "url": {
-                  "raw": "localhost:3000/api/settings",
+                  "raw": "{{API_URL}}/api/settings",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "settings"
@@ -1636,11 +1615,10 @@
                   }
                 ],
                 "url": {
-                  "raw": "localhost:3000/api/settings",
+                  "raw": "{{API_URL}}/api/settings",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "settings"
@@ -1699,11 +1677,10 @@
                   }
                 },
                 "url": {
-                  "raw": "localhost:3000/api/settings",
+                  "raw": "{{API_URL}}/api/settings",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "settings"
@@ -1751,11 +1728,10 @@
                   }
                 },
                 "url": {
-                  "raw": "localhost:3000/api/settings",
+                  "raw": "{{API_URL}}/api/settings",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "settings"
@@ -1804,11 +1780,10 @@
                   }
                 },
                 "url": {
-                  "raw": "localhost:3000/api/settings",
+                  "raw": "{{API_URL}}/api/settings",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "settings"
@@ -1857,11 +1832,10 @@
                   }
                 },
                 "url": {
-                  "raw": "localhost:3000/api/settings",
+                  "raw": "{{API_URL}}/api/settings",
                   "host": [
-                    "localhost"
+                    "{{API_URL}}"
                   ],
-                  "port": "3000",
                   "path": [
                     "api",
                     "settings"
@@ -1873,6 +1847,30 @@
           ]
         }
       ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
     }
   ],
   "variable": [
@@ -1894,6 +1892,10 @@
     },
     {
       "key": "admin_token",
+      "value": ""
+    },
+    {
+      "key": "API_URL",
       "value": ""
     }
   ]
