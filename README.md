@@ -15,6 +15,7 @@ Content Media Authencity backend
 
 <code>MONGODB_URI</code>=your_mongo_url<br>
 <code>SESSION_SECRET</code>=yourSecretKey <br>
+<code>JWT_SECRET</code> =your_jwt_secret_code <br>
 <code>PORT</code>=your_running_port <br>
 <code>EMAIL_USER</code>=email_for_sending_email_verfication_here <br>
 <code>EMAIL_PASS</code>=password_of_above_email <br>
