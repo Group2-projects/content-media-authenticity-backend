@@ -16,6 +16,7 @@ const { sessionTimeout } = require('./middleware/auth');
 const authRoutes= require('./routes/auth/authRoutes');
 const userRoutes=require('./routes/user/userRoute');
 const settingRouter= require('./routes/settings/settingsRoute');
+const videoRoutes = require('./routes/video/videoRoutes');
 
 const app=express();
 app.disable('x-powered-by');
@@ -71,6 +72,7 @@ app.use((err, req, res, next) => {
 app.use('/',authRoutes);
 app.use('/',userRoutes);
 app.use('/',settingRouter);
+app.use('/', videoRoutes);
 
 app.listen(process.env.PORT,()=>{   
     console.log(`Server is running on port ${process.env.PORT}`);
