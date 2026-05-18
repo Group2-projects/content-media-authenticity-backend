@@ -11,8 +11,8 @@ const videoSchema = new mongoose.Schema({
     // -------------------------
     // STORAGE INFO
     // -------------------------
-    url: { type: String, required: true ,default: ""},
-    s3_key: { type: String, required: true, index: true },
+    url: { type: String, default: ""},
+    s3_key: { type: String, default: "", index: true },
     original_filename: { type: String },
     mime_type: { type: String },
     file_size: { type: Number }, // Kept here at the root level
