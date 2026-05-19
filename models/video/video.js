@@ -6,7 +6,7 @@ const videoSchema = new mongoose.Schema({
     // CORE VIDEO INFO
     // -------------------------
     title: { type: String, required: true, trim: true },
-    description: { type: String, required: true, trim: true },
+    description: { type: String, required: false, trim: true },
 
     // -------------------------
     // STORAGE INFO
