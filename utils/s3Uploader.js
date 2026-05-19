@@ -28,7 +28,7 @@ const uploadLargeFileToS3 = async (fileStream, originalFilename, mimeType) => {
     const result = await uploader.done();
     return {
         url: result.Location,
-        s3_key: `videos/${uniqueFileName}`
+        s3_video_name: `videos/${uniqueFileName}`
     };
 };
 

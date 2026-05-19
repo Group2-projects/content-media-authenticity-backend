@@ -93,7 +93,7 @@ exports.uploadVideo = async (req, res) => {
         console.log(`[Upload] Processing finished! S3 URL: ${s3Result.url}, Hash: ${sha256_hash}`);
         console.log(`[Upload] Updating database record to completed...`);
         video.url = s3Result.url;
-        video.s3_key = s3Result.s3_key;
+        video.s3_video_name = s3Result.s3_video_name;
         video.sha256_hash = sha256_hash;
         video.metadata = metadata;
         video.upload_status = 'completed';
