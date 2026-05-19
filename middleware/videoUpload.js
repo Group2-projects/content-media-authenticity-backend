@@ -21,7 +21,7 @@ const upload = multer({
 
 // Catch Multer errors gracefully
 const uploadMiddleware = (req, res, next) => {
-    upload.single('videoFile')(req, res, function (err) {
+    upload.single('video')(req, res, function (err) {
         if (err instanceof multer.MulterError) {
             if (err.code === 'LIMIT_FILE_SIZE') {
                 return res.status(413).json({ error: "File too large. Maximum size is 500MB." });
