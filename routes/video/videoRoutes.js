@@ -23,6 +23,10 @@ const { uploadMiddleware } = require('../../middleware/videoUpload');
  *               video:
  *                type: string
  *                format: binary
+ *               title:
+ *                type: string
+ *               description:
+ *                type: string
  *     responses:
  *       200:
  *         description: Video uploaded successfully
