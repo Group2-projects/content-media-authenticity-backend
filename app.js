@@ -12,6 +12,10 @@ const flash=require('connect-flash');
 const passport=require('./config/passport');
 const { sessionTimeout } = require('./middleware/auth');
 
+//Initialize the swagger components here
+const swaggerUi=require('swagger-ui-express');
+const swaggerJsdoc=require('swagger-jsdoc');
+
 //Initialize the routes here
 const authRoutes= require('./routes/auth/authRoutes');
 const userRoutes=require('./routes/user/userRoute');
@@ -19,6 +23,7 @@ const settingRouter= require('./routes/settings/settingsRoute');
 const videoRoutes = require('./routes/video/videoRoutes');
 
 const app=express();
+
 app.disable('x-powered-by');
 app.use(helmet());
 //Mongoose connection here
@@ -73,6 +78,29 @@ app.use('/',authRoutes);
 app.use('/',userRoutes);
 app.use('/',settingRouter);
 app.use('/', videoRoutes);
+
+//Implementation of swagger definition here
+const swaggerOptions={
+    definition: {
+        openapi: "3.0.0",
+        info: {
+            title: "Content Media Authenticity API",
+            version: "1.0.0",
+            description: "API documentation for the Content Media Authenticity project",
+        },
+        servers: [
+            {
+                url: "http://localhost:3000",
+            },
+        ],
+    },
+    apis: ["./routes/**/*.js"],
+};
+
+//Initialize the swagger-jsdoc
+const swaggerDocs = swaggerJsdoc(swaggerOptions);
+//Serve-Swagger UI
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.listen(process.env.PORT,()=>{   
     console.log(`Server is running on port ${process.env.PORT}`);
