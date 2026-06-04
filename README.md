@@ -11,6 +11,7 @@ Content Media Authencity backend
   <li>Check the port you have mentioned in the <code>.env</code> file and run it as <code>localhost:3000/</code></li>
   <li>To run the API test install one of the packages <code>npm i -g newman-reporter-htmlextra</code></li>
   <li>Run the following command to get the HTML report when the server is running <code>newman run postman/API_test/Content-Media-Authenticity-Backend\ API\ Test.postman_collection.json -e postman/environment/Local_Environment.postman_environment.json  -r htmlextra --reporter-htmlextra-export report.html </code></li>
+  <li>For API documentation of swagger follow this URL <code>localhost:3000/api-docs/</code></li>
 </ol>
 
 # Instructions for variables required in the .env file
