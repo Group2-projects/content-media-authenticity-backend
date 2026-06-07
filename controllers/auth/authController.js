@@ -25,7 +25,7 @@ exports.registerUser= async (req,res)=>{
         email: Joi.string().email().required(),
         dob: Joi.date().max('now').required(),
         phone: Joi.string().min(10).max(15).required(),
-        password: Joi.string().min(8).required()
+        password: Joi.string().min(8).max(12).required()
     });
     const { error } = registerSchema.validate(req.body);
     if (error) {
@@ -90,7 +90,7 @@ async function welcomeEmail(userEmail){
 exports.login= async (req,res)=>{
     const schema=Joi.object({
         email:Joi.string().email().required(),
-        password:Joi.string().min(6).max(12).required()
+        password:Joi.string().min(8).max(12).required()
     })
 
     if (!req.body) {
