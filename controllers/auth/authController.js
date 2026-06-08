@@ -168,3 +168,21 @@ async function userLoginHistory(userId, ip){
     });
     await userLoginHistory.save();
 }
+
+//Logout feature of the sessions as well as clearing user data
+exports.logout = async(req,res)=>{
+    const user = req.session.user;
+    
+    try {
+        req.session.destroy((err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ error: 'Internal server error' });
+            }
+            return res.status(200).json({ message: 'Logout successful' });
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+}

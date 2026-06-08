@@ -1,6 +1,7 @@
 const express= require('express');
 const passport = require('passport');
 const { registerUser, login, googleLoginSuccess }= require('../../controllers/auth/authController.js');
+const { isAuthenticated }= require('../../middleware/auth');
 
 const router = express.Router();
 
@@ -122,6 +123,25 @@ router.get('/api/auth/google/callback', (req, res, next) => {
             await googleLoginSuccess(req, res);
         });
     })(req, res, next);
+});
+
+/**
+ * @openapi
+ * /api/logout:
+ *   post:
+ *     tags:
+ *       - Authentication
+ *     summary: Logout the current user
+ *     description: Logs out the current user and ends the session.
+ *     responses:
+ *       200:
+ *         description: Logout successful
+ *       500:
+ *         description: Internal server error
+ */
+router.post('/api/logout', isAuthenticated, async (req, res) => {
+    console.log("Logging out user");
+    await logout(req, res);
 });
 
 module.exports = router;
