@@ -1,6 +1,6 @@
 const express= require('express');
 const passport = require('passport');
-const { registerUser, login, googleLoginSuccess }= require('../../controllers/auth/authController.js');
+const { registerUser, login, googleLoginSuccess, logout }= require('../../controllers/auth/authController.js');
 const { isAuthenticated }= require('../../middleware/auth');
 
 const router = express.Router();
@@ -132,16 +132,31 @@ router.get('/api/auth/google/callback', (req, res, next) => {
  *     tags:
  *       - Authentication
  *     summary: Logout the current user
- *     description: Logs out the current user and ends the session.
+ *     description: Logout the current user and destroy the session.
+ *     parameters:
+ *       - in: header
+ *         name: Authorization
+ *         required: true
+ *         schema:
+ *           type: string
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Logout successful
+ *       401:
+ *         description: Unauthorized
  *       500:
  *         description: Internal server error
  */
-router.post('/api/logout', isAuthenticated, async (req, res) => {
-    console.log("Logging out user");
-    await logout(req, res);
+router.post('/api/logout', async (req, res) => {
+    // console.log("Logging out user");
+    try {
+        await logout(req, res);
+    } catch (err) {
+        console.error('Logout error:', err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 });
 
 module.exports = router;

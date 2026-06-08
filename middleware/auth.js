@@ -1,4 +1,5 @@
 const jwt=require('jsonwebtoken');
+const redisClient = require('../config/redisConfig');
 //Inactive session timeout
 const SESSION_TIMEOUT = 1000 * 60 * 10; // 10 minutes
 
@@ -23,20 +24,35 @@ exports.sessionTimeout = (req, res, next) => {
     next();
 }
 
-exports.isAuthenticated= (req, res, next) => {
+exports.isAuthenticated= async (req, res, next) => {
     const authHeader = req.headers['authorization'];
     if (!authHeader) {
         return res.status(401).json({ error: 'No token provided' });
     }
 
     const token = authHeader.split(' ')[1];
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+
+    try {
+        // Intercept request: Ask Redis if this token is blacklisted
+        const isBlacklisted = await redisClient.get(`blacklist:${token}`);
+        // console.log(`Token blacklisted: ${isBlacklisted}`);
+        if (isBlacklisted) {
+            return res.status(401).json({ error: 'Token has been invalidated. Please login again.' });
+        }
+
+        // Proceed normally if not blacklisted
+        jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
         if (err) {
             return res.status(403).json({ error: 'Invalid token' });
         }
         req.user = user;
         next();
-    });
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(400).json({ error: 'Invalid or expired token' });
+    }
+    
 }
 
 exports.isAdmin = (req, res, next) => {

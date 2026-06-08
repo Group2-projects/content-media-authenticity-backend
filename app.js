@@ -95,6 +95,15 @@ const swaggerOptions={
         ],
     },
     apis: ["./routes/**/*.js"],
+    components: {
+        securitySchemes: {
+            bearerAuth: {
+                type: "http",
+                scheme: "bearer",
+                bearerFormat: "JWT"
+            }
+        }
+    }
 };
 
 //Initialize the swagger-jsdoc
