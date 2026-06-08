@@ -12,6 +12,25 @@ const router=express.Router();
 
 /**
  * @openapi
+ * /api/user/videos:
+ *   get:
+ *     tags:
+ *       - User
+ *     summary: Get user videos
+ *     description: Retrieve the videos uploaded by a user.
+ *     responses:
+ *       200:
+ *         description: User videos retrieved successfully
+ *       404:
+ *         description: User not found
+ */
+router.get('/api/user/videos', isAuthenticated, async(req,res)=>{
+    console.log("Fetching videos for user with data:", req.body);
+    await getUserVideos(req,res);
+});
+
+/**
+ * @openapi
  * /api/user/{id}:
  *   get:
  *     tags:
@@ -84,22 +103,5 @@ router.put('/api/user/:id', isAuthenticated, async (req, res) => {
     await updateProfile(req, res);
 });
 
-/**
- * @openapi
- * /api/videos:
- *   get:
- *     tags:
- *       - User
- *     summary: Get user videos
- *     description: Retrieve the videos uploaded by a user.
- *     responses:
- *       200:
- *         description: User videos retrieved successfully
- *       404:
- *         description: User not found
- */
-router.get('/api/user/videos', isAuthenticated, async(req,res)=>{
-    console.log("Fetching videos for user with data:", req.body);
-    await getUserVideos(req,res);
-});
+
 module.exports = router;
