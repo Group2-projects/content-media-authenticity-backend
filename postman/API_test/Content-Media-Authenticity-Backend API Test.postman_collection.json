@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "47f43f8f-7b29-4b90-b19f-bee60fbd9109",
     "name": "Content-Media-Authenticity-Backend API Test",
-    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "description": "### Content Media Authenticity Backend API Test\n\nContents covered in this test are as follows:\n\n1. Register\n    \n2. Login\n    \n3. User Details\n    \n4. User Settings\n    \n5. Update Settings",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "49695493",
     "_collection_link": "https://go.postman.co/collection/49695493-47f43f8f-7b29-4b90-b19f-bee60fbd9109?source=collection_link"
@@ -1231,22 +1231,16 @@
                 ],
                 "body": {
                   "mode": "urlencoded",
-                  "urlencoded": [
-                    {
-                      "key": "user_id",
-                      "value": "{{user_id}}",
-                      "type": "text",
-                      "uuid": "48d46486-c0df-4a4a-81d6-ce4d39ef8b3e"
-                    }
-                  ]
+                  "urlencoded": []
                 },
                 "url": {
-                  "raw": "{{API_URL}}/api/videos",
+                  "raw": "{{API_URL}}/api/user/videos",
                   "host": [
                     "{{API_URL}}"
                   ],
                   "path": [
                     "api",
+                    "user",
                     "videos"
                   ]
                 }
@@ -1258,66 +1252,6 @@
         {
           "name": "Get User Videos Invalid Test Cases",
           "item": [
-            {
-              "name": "Get User Videos no User_id",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test(\"Status code is 500\", function () {\r",
-                      "    pm.response.to.have.status(500);\r",
-                      "});\r",
-                      ""
-                    ],
-                    "type": "text/javascript",
-                    "packages": {},
-                    "requests": {}
-                  }
-                }
-              ],
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Authorization",
-                    "value": "{{token}}",
-                    "type": "text"
-                  }
-                ],
-                "body": {
-                  "mode": "urlencoded",
-                  "urlencoded": [
-                    {
-                      "key": "user_id",
-                      "value": "69fad0d3bc0481478e93e2d2",
-                      "type": "text",
-                      "uuid": "48d46486-c0df-4a4a-81d6-ce4d39ef8b3e",
-                      "disabled": true
-                    }
-                  ]
-                },
-                "url": {
-                  "raw": "{{API_URL}}/api/videos",
-                  "host": [
-                    "{{API_URL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "videos"
-                  ]
-                }
-              },
-              "response": []
-            },
             {
               "name": "Get User Videos no Authorization token",
               "event": [
@@ -1370,12 +1304,13 @@
                   ]
                 },
                 "url": {
-                  "raw": "{{API_URL}}/api/videos",
+                  "raw": "{{API_URL}}/api/user/videos",
                   "host": [
                     "{{API_URL}}"
                   ],
                   "path": [
                     "api",
+                    "user",
                     "videos"
                   ]
                 }
@@ -1433,12 +1368,13 @@
                   ]
                 },
                 "url": {
-                  "raw": "{{API_URL}}/api/videos",
+                  "raw": "{{API_URL}}/api/user/videos",
                   "host": [
                     "{{API_URL}}"
                   ],
                   "path": [
                     "api",
+                    "user",
                     "videos"
                   ]
                 }
@@ -1847,6 +1783,58 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Logout user",
+      "item": [
+        {
+          "name": "Logout user valid",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "email",
+                  "value": "{{new_email}}",
+                  "type": "text",
+                  "uuid": "c5b82b05-4558-48bc-874e-fdbe96e6b868"
+                },
+                {
+                  "key": "password",
+                  "value": "Test@123",
+                  "type": "text",
+                  "uuid": "48d46486-c0df-4a4a-81d6-ce4d39ef8b3e",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{API_URL}}/api/logout",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "api",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     }
   ],
   "event": [
@@ -1875,27 +1863,15 @@
   ],
   "variable": [
     {
-      "key": "new_email",
-      "value": ""
-    },
-    {
       "key": "token",
       "value": ""
     },
     {
+      "key": "new_email",
+      "value": ""
+    },
+    {
       "key": "user_id",
-      "value": ""
-    },
-    {
-      "key": "admin_user_id",
-      "value": ""
-    },
-    {
-      "key": "admin_token",
-      "value": ""
-    },
-    {
-      "key": "API_URL",
       "value": ""
     }
   ]
