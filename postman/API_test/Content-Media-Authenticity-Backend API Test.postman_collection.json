@@ -1789,50 +1789,226 @@
       "item": [
         {
           "name": "Logout user valid",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
-              },
-              {
-                "key": "Authorization",
-                "value": "{{token}}",
-                "type": "text"
-              }
-            ],
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
+          "item": [
+            {
+              "name": "Logout user valid",
+              "event": [
                 {
-                  "key": "email",
-                  "value": "{{new_email}}",
-                  "type": "text",
-                  "uuid": "c5b82b05-4558-48bc-874e-fdbe96e6b868"
-                },
-                {
-                  "key": "password",
-                  "value": "Test@123",
-                  "type": "text",
-                  "uuid": "48d46486-c0df-4a4a-81d6-ce4d39ef8b3e",
-                  "disabled": true
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Check if message Logout successful\", function () {\r",
+                      "    const jsonBody = pm.response.json();\r",
+                      "    pm.expect(jsonBody.message).to.eql(\"Logout successful\");\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
                 }
-              ]
-            },
-            "url": {
-              "raw": "{{API_URL}}/api/logout",
-              "host": [
-                "{{API_URL}}"
               ],
-              "path": [
-                "api",
-                "logout"
-              ]
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": []
+                },
+                "url": {
+                  "raw": "{{API_URL}}/api/logout",
+                  "host": [
+                    "{{API_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "logout"
+                  ]
+                }
+              },
+              "response": []
             }
-          },
-          "response": []
+          ]
+        },
+        {
+          "name": "Logout User Invalid",
+          "item": [
+            {
+              "name": "Logout user Invalid no TOKEN",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 401\", function () {\r",
+                      "    pm.response.to.have.status(401);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Response body contains error message\", function () {\r",
+                      "    const body = pm.response.json();\r",
+                      "    pm.expect(body.error).to.eql(\"No token provided\");\r",
+                      "})"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": []
+                },
+                "url": {
+                  "raw": "{{API_URL}}/api/logout",
+                  "host": [
+                    "{{API_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "logout"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Logout user Invalid TOKEN blacklisted",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 401\", function () {\r",
+                      "    pm.response.to.have.status(401);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Response body contains error message\", function () {\r",
+                      "    const body = pm.response.json();\r",
+                      "    pm.expect(body.error).to.eql(\"Token has been invalidated. Please login again.\");\r",
+                      "})"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": []
+                },
+                "url": {
+                  "raw": "{{API_URL}}/api/logout",
+                  "host": [
+                    "{{API_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "logout"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Logout user Invalid TOKEN",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 403\", function () {\r",
+                      "    pm.response.to.have.status(403);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Response body contains error message\", function () {\r",
+                      "    const body = pm.response.json();\r",
+                      "    pm.expect(body.error).to.eql(\"Invalid token\");\r",
+                      "})"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "asdfg",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": []
+                },
+                "url": {
+                  "raw": "{{API_URL}}/api/logout",
+                  "host": [
+                    "{{API_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "logout"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
         }
       ]
     }

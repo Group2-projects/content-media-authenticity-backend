@@ -149,7 +149,7 @@ router.get('/api/auth/google/callback', (req, res, next) => {
  *       500:
  *         description: Internal server error
  */
-router.post('/api/logout', async (req, res) => {
+router.post('/api/logout', isAuthenticated, async (req, res) => {
     // console.log("Logging out user");
     try {
         await logout(req, res);
