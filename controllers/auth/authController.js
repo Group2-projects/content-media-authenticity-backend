@@ -7,6 +7,8 @@ const {
 const bcrypt = require('bcrypt');
 const nodemailer=require('nodemailer');
 const jwt= require('jsonwebtoken');
+const redisClient = require('../../config/redisConfig');
+
 
 /**
  * Registers a new user.
@@ -167,4 +169,35 @@ async function userLoginHistory(userId, ip){
         ipAddress: ip
     });
     await userLoginHistory.save();
+}
+
+//Logout feature of the sessions as well as clearing user data
+exports.logout = async(req,res)=>{
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    
+    const currentTime = Math.floor(Date.now() / 1000);
+    const timeLeft = decoded.exp - currentTime;
+
+    if (timeLeft > 0) {
+        // 3. Store the token in Redis with a Time-To-Live (TTL) 
+        // So it automatically deletes itself after it naturally expires
+        await redisClient.setEx(`blacklist:${token}`, timeLeft, 'true');
+        console.log(`Token blacklisted: ${token}`);
+    }
+
+    try {
+        req.session.destroy((err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ error: 'Internal server error' });
+            }
+            return res.status(200).json({ message: 'Logout successful' });
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Internal server error' });
+    }  
 }

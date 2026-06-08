@@ -12,6 +12,7 @@ Content Media Authencity backend
   <li>To run the API test install one of the packages <code>npm i -g newman-reporter-htmlextra</code></li>
   <li>Run the following command to get the HTML report when the server is running <code>newman run postman/API_test/Content-Media-Authenticity-Backend\ API\ Test.postman_collection.json -e postman/environment/Local_Environment.postman_environment.json  -r htmlextra --reporter-htmlextra-export report.html </code></li>
   <li>For API documentation of swagger follow this URL <code>localhost:3000/api-docs/</code></li>
+  <li>For the redis configuration download the redis setup and connect it with <code>REDIS_URL</code>.
 </ol>
 
 # Instructions for variables required in the .env file
@@ -29,3 +30,4 @@ Content Media Authencity backend
 <code>AWS_S3_BUCKET_NAME</code>=your_bucket_name <br>
 <code>AWS_ACCESS_KEY_ID</code>=your_AWS_ACCESS_KEY_ID <br>
 <code>AWS_SECRET_ACCESS_KEY</code>=your_AWS_SECRET_ACCESS_KEY <br>
+<code>REDIS_URL</code>=redis://127.0.0.1:6379
