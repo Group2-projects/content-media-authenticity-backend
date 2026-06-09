@@ -151,11 +151,13 @@ exports.googleLoginSuccess = async (req, res) => {
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
         await userLoginHistory(req.user._id, req.ip);
 
-        return res.status(200).json({
-            message: 'Google login successful',
-            user: req.user,
-            token: 'Bearer ' + token
-        });
+        // return res.status(200).json({
+        //     message: 'Google login successful',
+        //     user: req.user,
+        //     token: 'Bearer ' + token
+        // });
+        console.log(`Google login successful for user: ${req.user.email}`);
+        return res.redirect(`${process.env.FRONTEND_URL}/auth/callback?token=${encodeURIComponent('Bearer ' + token)}&user=${encodeURIComponent(JSON.stringify(req.user))}`);
     } catch (err) {
         console.error(err);
         return res.status(500).json({ error: 'Internal server error' });
