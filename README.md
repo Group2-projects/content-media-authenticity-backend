@@ -31,3 +31,4 @@ Content Media Authencity backend
 <code>AWS_ACCESS_KEY_ID</code>=your_AWS_ACCESS_KEY_ID <br>
 <code>AWS_SECRET_ACCESS_KEY</code>=your_AWS_SECRET_ACCESS_KEY <br>
 <code>REDIS_URL</code>=redis://127.0.0.1:6379
+<code>FRONTEND_URL</code>=http://localhost:3001
