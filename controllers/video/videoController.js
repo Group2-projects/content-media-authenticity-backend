@@ -98,12 +98,33 @@ exports.uploadVideo = async (req, res) => {
         video.metadata = metadata;
         video.upload_status = 'completed';
         await video.save();
-
+    
         // 5. Cleanup local file
         console.log(`[Upload] Cleaning up temp local file...`);
         if (req.file) {
             await fs.promises.unlink(req.file.path).catch(console.error);
         }
+
+        //6. Pass the data to the AI/ML server for authenticity processing and verification
+        console.log("Uploading the details in the AI server...");
+        console.log(metadata);
+        const response = await fetch(`${process.env.AI_SERVER_URL || "http://localhost:8000"}/score`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                video_id: video._id+"",
+                user_id: req.user.userId+"",
+                metadata: metadata
+            })
+        });
+
+        const aiResult = await response.json();
+        console.log(`[Upload] Received response from AI server:`, aiResult);
+        //Updating the result in the database
+        await Video.findByIdAndUpdate(video._id, { authenticity_score: aiResult.authenticity_score }).catch(console.error);
 
         console.log(`[Upload] Sequence finished successfully!`);
         res.status(201).json({ message: "Video uploaded successfully", video });

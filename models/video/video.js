@@ -30,7 +30,7 @@ const videoSchema = new mongoose.Schema({
     // -------------------------
     // AUTHENTICITY SYSTEM
     // -------------------------
-    authenticity_score: { type: Number, default: 100, min: 0, max: 100 },
+    authenticity_score: { type: Number, default: 0, min: 0, max: 100 },
     sha256_hash: { type: String, index: true },
     upload_status: {
         type: String,
