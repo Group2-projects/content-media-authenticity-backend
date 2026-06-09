@@ -32,6 +32,7 @@ Content Media Authencity backend
 <code>AWS_SECRET_ACCESS_KEY</code>=your_AWS_SECRET_ACCESS_KEY <br>
 <code>REDIS_URL</code>=redis://127.0.0.1:6379
 <code>FRONTEND_URL</code>=http://localhost:3001
+<code>METADATA_EXTRACTION_API_KEY=key_provided_by_AI_here
 
 # Docker Redis configuration for the token expiry testing
 As we are also using redis for the token validation of the JWT token. We need the redis-server to be running. 

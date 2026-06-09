@@ -112,7 +112,7 @@ exports.uploadVideo = async (req, res) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                // 'Authorization': `Bearer ${token}`
+                'x-api-key': process.env.METADATA_EXTRACTION_API_KEY
             },
             body: JSON.stringify({
                 video_id: video._id+"",
