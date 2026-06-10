@@ -25,7 +25,7 @@ const router=express.Router();
  *         description: User not found
  */
 router.get('/api/user/videos', isAuthenticated, async(req,res)=>{
-    console.log("Fetching videos for user with data:", req.body);
+    // console.log("Fetching videos for user with data:", req.body);
     await getUserVideos(req,res);
 });
 
