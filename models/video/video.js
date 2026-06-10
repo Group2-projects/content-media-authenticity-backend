@@ -30,7 +30,7 @@ const videoSchema = new mongoose.Schema({
     // -------------------------
     // AUTHENTICITY SYSTEM
     // -------------------------
-    authenticity_score: { type: Number, default: 100, min: 0, max: 100 },
+    authenticity_score: { type: Number, default: 0, min: 0, max: 100 },
     sha256_hash: { type: String, index: true },
     upload_status: {
         type: String,
@@ -83,4 +83,15 @@ const videoSchema = new mongoose.Schema({
     timestamps: true 
 });
 
-module.exports = mongoose.model('Video', videoSchema);
+const videoProcessingLogs = new mongoose.Schema({
+    video_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Video', required: true },
+    user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    metadata: { type: Object, required: true },
+    createdAt: { type: Date, default: Date.now },
+    response: { type: Object, required: true, default: {} }
+});
+
+module.exports = {
+    Video: mongoose.model('Video', videoSchema),
+    VideoProcessingLogs: mongoose.model('VideoProcessingLogs', videoProcessingLogs)
+};

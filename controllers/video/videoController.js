@@ -1,7 +1,7 @@
 const fs = require('fs');
 const crypto = require('crypto');
 const Joi = require('joi');
-const Video = require('../../models/video/video');
+const { Video, VideoProcessingLogs } = require('../../models/video/video');
 const { extractVideoMetadata } = require('../../utils/metadataExtractor');
 const { uploadLargeFileToS3 } = require('../../utils/s3Uploader');
 
@@ -98,12 +98,42 @@ exports.uploadVideo = async (req, res) => {
         video.metadata = metadata;
         video.upload_status = 'completed';
         await video.save();
-
+    
         // 5. Cleanup local file
         console.log(`[Upload] Cleaning up temp local file...`);
         if (req.file) {
             await fs.promises.unlink(req.file.path).catch(console.error);
         }
+
+        //6. Pass the data to the AI/ML server for authenticity processing and verification
+        console.log("Uploading the details in the AI server...");
+        // console.log(metadata);
+        const response = await fetch(`${process.env.AI_SERVER_URL || "http://localhost:8000"}/score`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': process.env.METADATA_EXTRACTION_API_KEY
+            },
+            body: JSON.stringify({
+                video_id: video._id+"",
+                user_id: req.user.userId+"",
+                metadata: metadata
+            })
+        });
+
+        const aiResult = await response.json();
+        console.log(`[Upload] Received response from AI server:`, aiResult);
+        // 7. Log the processing details received from the AI server after processing of metadata
+        const processingLog = new VideoProcessingLogs({
+            video_id: video._id,
+            user_id: req.user.userId,
+            metadata: metadata,
+            response: aiResult
+        });
+        await processingLog.save().catch(console.error);
+
+        //8. Updating the result in the database finally
+        await Video.findByIdAndUpdate(video._id, { authenticity_score: aiResult.authenticity_score }).catch(console.error);
 
         console.log(`[Upload] Sequence finished successfully!`);
         res.status(201).json({ message: "Video uploaded successfully", video });
