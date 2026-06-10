@@ -83,4 +83,15 @@ const videoSchema = new mongoose.Schema({
     timestamps: true 
 });
 
-module.exports = mongoose.model('Video', videoSchema);
+const videoProcessingLogs = new mongoose.Schema({
+    video_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Video', required: true },
+    user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    metadata: { type: Object, required: true },
+    createdAt: { type: Date, default: Date.now },
+    response: { type: Object, required: true, default: {} }
+});
+
+module.exports = {
+    Video: mongoose.model('Video', videoSchema),
+    VideoProcessingLogs: mongoose.model('VideoProcessingLogs', videoProcessingLogs)
+};
