@@ -5,6 +5,7 @@ dns.setDefaultResultOrder('ipv4first');
 const path=require('path');
 const cors=require('cors');
 const helmet=require('helmet');
+const {rateLimit} =require('express-rate-limit');
 
 const mongoose=require('mongoose');
 const session=require('express-session');
@@ -78,6 +79,24 @@ app.use('/',authRoutes);
 app.use('/',userRoutes);
 app.use('/',settingRouter);
 app.use('/', videoRoutes);
+
+//Config the rate limiter here
+app.set('trust proxy', 0); // Trust the first proxy
+const limiter= rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    limit: 1, // Limit each IP to 1 request per windowMs
+    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers,
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+    message: "Too many requests from this IP, please try again later."
+});
+app.use(limiter);
+
+//Check the implementation for the ip and check if the IP is same or different in postman and browser
+app.use((req, res, next) => {
+  console.log("IP:", req.ip);
+  console.log("Forwarded:", req.headers["x-forwarded-for"]);
+  next();
+});
 
 //Implementation of swagger definition here
 const swaggerOptions={
