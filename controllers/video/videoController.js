@@ -107,7 +107,7 @@ exports.uploadVideo = async (req, res) => {
 
         //6. Pass the data to the AI/ML server for authenticity processing and verification
         console.log("Uploading the details in the AI server...");
-        console.log(metadata);
+        // console.log(metadata);
         const response = await fetch(`${process.env.AI_SERVER_URL || "http://localhost:8000"}/score`, {
             method: 'POST',
             headers: {
@@ -123,9 +123,6 @@ exports.uploadVideo = async (req, res) => {
 
         const aiResult = await response.json();
         console.log(`[Upload] Received response from AI server:`, aiResult);
-        //Updating the result in the database
-        await Video.findByIdAndUpdate(video._id, { authenticity_score: aiResult.authenticity_score }).catch(console.error);
-
         // 7. Log the processing details received from the AI server after processing of metadata
         const processingLog = new VideoProcessingLogs({
             video_id: video._id,
@@ -134,6 +131,9 @@ exports.uploadVideo = async (req, res) => {
             response: aiResult
         });
         await processingLog.save().catch(console.error);
+
+        //8. Updating the result in the database finally
+        await Video.findByIdAndUpdate(video._id, { authenticity_score: aiResult.authenticity_score }).catch(console.error);
 
         console.log(`[Upload] Sequence finished successfully!`);
         res.status(201).json({ message: "Video uploaded successfully", video });
