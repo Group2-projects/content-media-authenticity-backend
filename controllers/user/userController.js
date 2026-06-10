@@ -41,7 +41,7 @@ exports.updateProfile = async(req, res) => {
     const registerSchema = Joi.object({
         first_name: Joi.string().min(2).max(100).required(),
         last_name: Joi.string().min(2).max(100).required(),
-        email: Joi.string().email().required(),
+        // email: Joi.string().email().required(),
         dob: Joi.date().max('now').required(),
         phone: Joi.string().min(10).max(15).required(),
     });
@@ -53,7 +53,7 @@ exports.updateProfile = async(req, res) => {
     const updateData = {
         first_name: req.body.first_name,
         last_name: req.body.last_name,
-        email: req.body.email,
+        // email: req.body.email,
         dob: req.body.dob,
         phone: req.body.phone,
     };
