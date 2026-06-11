@@ -134,6 +134,9 @@ exports.uploadVideo = async (req, res) => {
 
         //8. Updating the result in the database finally
         await Video.findByIdAndUpdate(video._id, { authenticity_score: aiResult.authenticity_score }).catch(console.error);
+        
+        //update the video result
+        video.authenticity_score = aiResult.authenticity_score;
 
         console.log(`[Upload] Sequence finished successfully!`);
         res.status(201).json({ message: "Video uploaded successfully", video });
